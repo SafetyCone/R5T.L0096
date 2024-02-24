@@ -8,6 +8,7 @@ using R5T.L0092.T001;
 using R5T.T0241;
 
 using R5T.L0096.T000;
+using R5T.T0221;
 
 
 namespace R5T.L0096.O003
@@ -31,8 +32,32 @@ namespace R5T.L0096.O003
                     projectXElementOperations);
 
                 return Instances.ProjectXElementOperator.To_File_Separated(
-                        context.ProjectFilePath,
-                        projectXElement);
+                    context.ProjectFilePath,
+                    projectXElement);
+            };
+        }
+
+        public Func<TContext, TRepositoryContext, Task> In_CreateProjectFileContext<TContext, TRepositoryContext>(
+            IsSet<IHasProjectFilePath> projectFilePathSet,
+            out IChecked<IFileExists> projectFileChecked,
+            Func<TContext, TRepositoryContext, IEnumerable<Action<XElement>>> projectXElementOperationsGenerator)
+            where TContext : IHasProjectFilePath
+        {
+            projectFileChecked = Checked.Check<IFileExists>();
+
+            return (context, repositoryContext) =>
+            {
+                var projectXElementOperations = projectXElementOperationsGenerator(context, repositoryContext);
+
+                var projectXElement = Instances.ProjectXElementOperator.New_ProjectXElement();
+
+                Instances.ContextOperator.In_Context(
+                    projectXElement,
+                    projectXElementOperations);
+
+                return Instances.ProjectXElementOperator.To_File_Separated(
+                    context.ProjectFilePath,
+                    projectXElement);
             };
         }
 
@@ -54,8 +79,8 @@ namespace R5T.L0096.O003
                     projectXElementOperations);
 
                 return Instances.ProjectXElementOperator.To_File_Separated(
-                        context.ProjectFilePath,
-                        projectXElement);
+                    context.ProjectFilePath,
+                    projectXElement);
             };
         }
     }
