@@ -15,10 +15,10 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\R5T.F0040\source\R5T.F0040.F000\R5T.F0040.F000.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0221\source\R5T.T0221\R5T.T0221.csproj" />
     <ProjectReference Include="..\..\..\R5T.T0241\source\R5T.T0241\R5T.T0241.csproj" />
     <ProjectReference Include="..\R5T.L0096.T000\R5T.L0096.T000.csproj" />
-    <ProjectReference Include="..\..\..\R5T.F0052\source\R5T.F0052\R5T.F0052.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Code\Values\" />

@@ -12,6 +12,20 @@ namespace R5T.L0096.O000
     [ContextOperationsMarker]
     public partial interface IProjectContextOperations : IContextOperationsMarker
     {
+        public Func<TContext, TSourceContext, Task> Set_NamespaceName<TContext, TSourceContext>(
+            IsSet<IHasNamespaceName> namespaceNameRequired,
+            out IsSet<IHasNamespaceName> namespaceNameSet)
+            where TContext : IWithNamespaceName
+            where TSourceContext : IHasNamespaceName
+        {
+            return (context, sourceContext) =>
+            {
+                context.NamespaceName = sourceContext.NamespaceName;
+
+                return Task.CompletedTask;
+            };
+        }
+
         public Func<TContext, Task> Set_NamespaceName<TContext>(
             IsSet<IHasProjectName> projectNameRequired,
             out IsSet<IHasNamespaceName> namespaceNameSet)
